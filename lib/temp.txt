@@ -1,0 +1,4 @@
+setUserName() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('user_name', "123456");
+}
