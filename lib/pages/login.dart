@@ -44,7 +44,7 @@ class _OcmLoginState extends State<OcmLogin> {
         );
         if (response.statusCode == 200) {
           if (jsonDecode(response.body)[0]['pass'] == pass) {
-            setUserData(usrName);
+            await setUserData(usrName);
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -62,65 +62,70 @@ class _OcmLoginState extends State<OcmLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 20,
-        shape: StadiumBorder(),
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height * .6,
-            width: MediaQuery.of(context).size.width * .8,
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * .08),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .2,
-                  child: Image.asset("assets/images/ocm.png"),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: userNameController,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    labelText: "username",
-                    hintText: "username",
+    return Scaffold(
+      body: Center(
+        child: Card(
+          elevation: 20,
+          shape: StadiumBorder(),
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .6,
+              width: MediaQuery.of(context).size.width * .8,
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * .08),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .2,
+                    child: Image.asset("assets/images/ocm.png"),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
+                    controller: userNameController,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      labelText: "username",
+                      hintText: "username",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  PasswordField(
+                    hasFloatingPlaceholder: true,
+                    floatingText: "Password",
+                    controller: passwordController,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
+                        borderRadius: BorderRadius.circular(32.0)),
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                PasswordField(
-                  controller: passwordController,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32.0)),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Material(
-                  elevation: 5.0,
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: Color(0xff01A0C7),
-                  child: MaterialButton(
-                    minWidth: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    onPressed: () {
-                      checkUser(
-                          userNameController.text, passwordController.text);
-                    },
-                    child: Text(
-                      "Login",
-                      textAlign: TextAlign.center,
-                    ),
+                  SizedBox(
+                    height: 15,
                   ),
-                )
-              ],
+                  Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Color(0xff01A0C7),
+                    child: MaterialButton(
+                      minWidth: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      onPressed: () {
+                        checkUser(
+                            userNameController.text, passwordController.text);
+                      },
+                      child: Text(
+                        "Login",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
