@@ -44,7 +44,7 @@ Future setUserData(String usrName) async {
   prefs.setString('role_name', value['role_name']);
   prefs.setString('userid', value['userid']);
   prefs.setString('user_name', value['login_username']);
-  prefs.setInt('role_id', value['role_id']);
+  prefs.setString('role_id', value['role_id'].toString());
 }
 
 changeServerpass(String password) async {

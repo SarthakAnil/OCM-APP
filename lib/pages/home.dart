@@ -9,11 +9,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var name, email, usrID;
+  var name, email, usrID, roll, roleId = false;
   setVal() async {
     name = await getUserInfo('Name');
     email = await getUserInfo('email');
     usrID = await getUserInfo('userid');
+    roll = await getUserInfo('role_id');
+    if (roll == "0") roleId = true;
+
     setState(() {
       //   print("STate SET");
     });
@@ -67,6 +70,15 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      floatingActionButton: roleId
+          ? FloatingActionButton.extended(
+              label: Text("ADD Event"),
+              icon: Icon(Icons.add),
+              onPressed: () {
+                setState(() {});
+              },
+            )
+          : null,
     );
   }
 }
