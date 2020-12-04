@@ -20,7 +20,7 @@ putEvent(String eventId, String userid, String batchId, String eventName,
     ),
   );
   if (response.statusCode == 200) {
-    print("event added");
+   // print("event added");
   } else {
     throw Exception('Failed to load File details');
   }

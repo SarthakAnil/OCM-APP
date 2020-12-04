@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ocm/pages/ListEvents.dart';
+import 'package:ocm/pages/alert.dart';
 import 'package:ocm/resource/functions.dart';
 import 'package:ocm/resource/hamburger.dart';
 import 'package:ocm/server/putEvent.dart';
+import '../server/ServerFunctions.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -90,6 +92,7 @@ class _HomeState extends State<Home> {
     var idController = TextEditingController();
     var nameController = TextEditingController();
     bool err = false;
+    bool batchErr = false;
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -139,7 +142,7 @@ class _HomeState extends State<Home> {
                           ret = await checkID(val);
                           if (ret != err) {
                             state(() {
-                              print("setting err to ret");
+                              //     print("setting err to ret");
                               err = ret;
                             });
                           }
@@ -190,7 +193,19 @@ class _HomeState extends State<Home> {
                       ),
                       TextField(
                         controller: batchController,
+                        onChanged: (val) async {
+                          bool ret = true;
+                          // print(val);
+                          ret = await checkBatchID(val);
+                          if (ret != batchErr) {
+                            state(() {
+                              //  print("setting err to ret");
+                              batchErr = ret;
+                            });
+                          }
+                        },
                         decoration: InputDecoration(
+                          errorText: batchErr ? "No such batch!!!" : null,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           labelText: "Batch ID",
@@ -211,14 +226,22 @@ class _HomeState extends State<Home> {
                           minWidth: MediaQuery.of(context).size.width * .5,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           onPressed: () async {
-                            await putEvent(
-                                idController.text,
-                                usrID,
-                                batchController.text,
-                                nameController.text,
-                                descController.text);
-                            Navigator.of(context).pop();
-                            setState(() {});
+                            if (err ||
+                                batchErr ||
+                                batchController.text == "" ||
+                                idController.text == "") {
+                              showAlert(context,
+                                  "Please check input fields!!!\nEven ID should be unique and Batch should exist");
+                            } else {
+                              await putEvent(
+                                  idController.text,
+                                  usrID,
+                                  batchController.text,
+                                  nameController.text,
+                                  descController.text);
+                              Navigator.of(context).pop();
+                              setState(() {});
+                            }
                           },
                           child: Text(
                             "ADD EVENT",

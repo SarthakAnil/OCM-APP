@@ -55,6 +55,31 @@ void eventTap(BuildContext context, String msg) {
   );
 }
 
+
+
+void showAlert(BuildContext context, String msg) {
+  showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        title: Text('ALERT!!!'),
+        content: SingleChildScrollView(
+          child: Text(msg),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 void changePassConfirm(BuildContext context) {
   showDialog<bool>(
     context: context,
