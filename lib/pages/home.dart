@@ -12,13 +12,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var name, email, usrID, roll, roleId = false;
+  var name, email, usrID, roll, batchID, roleId = false;
 
   setVal() async {
     name = await getUserInfo('Name');
     email = await getUserInfo('email');
     usrID = await getUserInfo('userid');
     roll = await getUserInfo('role_id');
+    batchID = await getUserInfo('batch_id');
     if (roll == "0") roleId = true;
 
     setState(() {
@@ -38,7 +39,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: HamMenu(name, email, usrID),
+      // backgroundColor: Color.fromRGBO(249, 255, 166, 1),
+      drawer: HamMenu(name, email, usrID, roleId, batchID),
       appBar: AppBar(
         title: Center(child: Text("OCM HOME")),
       ),

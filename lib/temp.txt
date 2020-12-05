@@ -2,3 +2,143 @@ setUserName() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('user_name', "123456");
 }
+
+
+DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: "monday",
+              ),
+              Tab(
+                text: "monday",
+              ),
+              Tab(
+                text: "monday",
+              ),
+              Tab(
+                text: "monday",
+              ),
+              Tab(
+                text: "monday",
+              ),
+            ],
+          ),
+          title: Text('Tabs Demo'),
+        ),
+        body: TabBarView(
+          children: [
+            Icon(Icons.directions_car),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+          ],
+        ),
+      ),
+    )
+
+
+	(snapshot.data.monday[index].firstName ??"" +snapshot.data.monday[index].middleName ??"" +snapshot.data.monday[index].lastName ??"")
+
+/////SIZED SizedBox
+
+
+SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              "Monday",
+                              style: heading,
+                            ),
+                          ),
+                        ),
+
+
+
+
+						
+
+	SizedBox(
+                           height: 400,
+                          //  height: MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight,
+                          child: ListView.builder(
+                            itemCount: snapshot.data.monday.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 10),
+                                elevation: 10,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 15),
+                                  child: ListTile(
+                                    title: Text(
+                                        snapshot.data.monday[index].courseName),
+                                    subtitle: Text(
+                                        snapshot.data.monday[index].courseId),
+                                    onTap: () {
+                                      hourDetail(
+                                        context,
+                                        snapshot.data.monday[index].courseDesc,
+                                        ((snapshot.data.monday[index]
+                                                    .firstName ??
+                                                "") +
+                                            " " +
+                                            (snapshot.data.monday[index]
+                                                    .middleName ??
+                                                "") +
+                                            " " +
+                                            (snapshot.data.monday[index]
+                                                    .lastName ??
+                                                "")),
+                                        (snapshot.data.monday[index]
+                                                .teacherEmail ??
+                                            ""),
+                                        snapshot
+                                            .data.monday[index].teacherMobile
+                                            .toString(),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+
+
+
+
+
+
+FUTURE BUILDER STRIP DOWN 
+
+
+Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder(
+        future: fetchEvents(usrID),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null)
+            return Container(
+              child: Center(
+                child: SpinKitFadingCircle(
+                  color: Colors.blue,
+                  size: 100,
+                ),
+              ),
+            );
+          else {
+           
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
+}

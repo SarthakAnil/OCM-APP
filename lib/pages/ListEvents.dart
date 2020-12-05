@@ -26,11 +26,18 @@ class ListUserTable extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(32),
+                      bottomRight: Radius.circular(32),
+                    ),
+                  ),
                   margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   elevation: 10,
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 15),
                     child: ListTile(
+                      trailing: Icon(Icons.keyboard_arrow_right),
                       title: Text(snapshot.data[index].eventName),
                       subtitle: Text(snapshot.data[index].eventId),
                       onTap: () {

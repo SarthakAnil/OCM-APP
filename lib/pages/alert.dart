@@ -55,8 +55,6 @@ void eventTap(BuildContext context, String msg) {
   );
 }
 
-
-
 void showAlert(BuildContext context, String msg) {
   showDialog<bool>(
     context: context,
@@ -80,6 +78,42 @@ void showAlert(BuildContext context, String msg) {
     },
   );
 }
+
+void hourDetail(
+  BuildContext context,
+  String desc,
+  String name,
+  String mail,
+  String mob,
+) {
+  showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        title: Center(child: Text('Hour Detail')),
+        content: SingleChildScrollView(
+          child: ListBody(children: [
+            Text('DESC:' + desc),
+            Text('NAME:\n' + name),
+            Text('E-Mail:\n' + mail),
+            Text('Mob:  ' + mob),
+          ]),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 void changePassConfirm(BuildContext context) {
   showDialog<bool>(
     context: context,
@@ -191,4 +225,42 @@ class _PassChangeState extends State<PassChange> {
       ],
     );
   }
+}
+
+void secheduleDetail(
+  BuildContext context,
+  String batch,
+  String courseID,
+  String discipline,
+  String semester,
+  String desc,
+) {
+  showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        title: Center(child: Text('About Class')),
+        content: SingleChildScrollView(
+          child: ListBody(children: [
+            Text(discipline),
+            Text('semester:  ' + semester),
+            Text('Batch:  ' + batch),
+            Text('courseID: ' + courseID),
+            Text('DESC:\n' + desc),
+            
+          ]),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

@@ -1,13 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ocm/pages/TT.dart';
 import 'package:ocm/pages/login.dart';
+import 'package:ocm/pages/teacherTT.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/alert.dart';
 
 // ignore: must_be_immutable
 class HamMenu extends StatelessWidget {
-  String name, email, usrId;
-  HamMenu(this.name, this.email, this.usrId);
+ final String name, email, usrId,batchID;
+  final bool roleId;
+  HamMenu(this.name, this.email, this.usrId, this.roleId,this.batchID);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +29,31 @@ class HamMenu extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
-          ListTile(
-            title: Text("Temp Tile"),
-            onTap: () {
-            },
-          ),
+          !roleId
+              ? ListTile(
+                  title: Text("Time Table"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TT(batchID),
+                      ),
+                    );
+                  },
+                )
+              : ListTile(
+                  title: Text("Sechedule"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeacherTT(usrId),
+                      ),
+                    );
+                  },
+                ),
           ListTile(
             title: Text("Change Password"),
             onTap: () {
