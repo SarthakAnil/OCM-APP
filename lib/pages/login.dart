@@ -19,7 +19,7 @@ class _OcmLoginState extends State<OcmLogin> {
   final userNameController = TextEditingController();
 
   Future checkUser(String usrName, String pass) async {
-  //  print("chink usrname");
+    //  print("chink usrname");
     var response = await http.post(
       BASE_URL + '/user_check',
       headers: <String, String>{
@@ -29,7 +29,7 @@ class _OcmLoginState extends State<OcmLogin> {
         <String, String>{'usrName': usrName},
       ),
     );
-   // print("got response for usrname");
+    // print("got response for usrname");
 
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)[0]['exist'] == 0)
